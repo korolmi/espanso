@@ -1,0 +1,79 @@
+# espanso configuration file
+
+# This is the default configuration file, change it as you like it
+# You can refer to the official documentation:
+# https://espanso.org/docs/
+
+# Matches are the substitution rules, when you type the "trigger" string
+# it gets replaced by the "replace" string.
+matches:
+  # Simple text replacement
+  - trigger: ":espanso"
+    replace: "Hi there!"
+
+  - trigger: ":gmm"
+    replace: "korolmi@gmail.com"
+
+  - trigger: ":mkk"
+    replace: "Mikhail Korolev"
+
+  - trigger: ":ph"
+    replace: "89030034499"
+
+  - trigger: ":свв"
+    replace: "С уважением"
+
+  - trigger: ":мхх"
+    replace: "Михаил"
+
+  # подстановки для маркдауна, ноутбуков и т.п., технические
+
+  - trigger: ":х1"
+    replace: "# "
+
+  - trigger: ":х2"
+    replace: "## "
+
+  - trigger: ":х3"
+    replace: "### "
+
+  - trigger: ":юн"
+    replace: "Jupyter Notebook"
+
+  # предметная область программирования и питона
+
+  - trigger: ":сп"
+    replace: "Spark"
+
+  - trigger: ":аг"
+    replace: "agile"
+
+  - trigger: ":лн"
+    replace: "learning"
+
+  - trigger: ":пи"
+    replace: "python"
+
+  - trigger: ":Пи"
+    replace: "Python"
+
+  - trigger: ":ли"
+    replace: "linux"
+
+  # Dates
+  - trigger: ":date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%m/%d/%Y"
+
+  # Shell commands
+  - trigger: ":shell"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "echo Hello from your shell"
