@@ -40,25 +40,36 @@ matches:
   - trigger: ":юн"
     replace: "Jupyter Notebook"
 
+  - trigger: ":кд"
+    replace: "<code>$|$</code>"
+
+  - trigger: ":сст"
+    replace: "<syntaxhighlight lang=\"python\">>>> "
+
+  - trigger: ":ссе"
+    replace: "</syntaxhighlight>"
+
   # предметная область программирования и питона
 
   - trigger: ":сп"
-    replace: "Spark"
+    replace: "spark"
+    propagate_case: true
 
   - trigger: ":аг"
     replace: "agile"
+    propagate_case: true
 
   - trigger: ":лн"
     replace: "learning"
+    propagate_case: true
 
   - trigger: ":пи"
     replace: "python"
-
-  - trigger: ":Пи"
-    replace: "Python"
+    propagate_case: true
 
   - trigger: ":ли"
     replace: "linux"
+    propagate_case: true
 
   # Dates
   - trigger: ":date"
