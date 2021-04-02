@@ -4,13 +4,41 @@
 # You can refer to the official documentation:
 # https://espanso.org/docs/
 
-# Matches are the substitution rules, when you type the "trigger" string
-# it gets replaced by the "replace" string.
 matches:
-  # Simple text replacement
+  # общие замены, сначала - общесистемные
   - trigger: ":espanso"
     replace: "Hi there!"
 
+  - trigger: ":list"
+    doc: Показать список клавиатурных расширений
+    replace: "espanso match list"
+
+  - trigger: ":doc"
+    doc: Показать краткую памятку по команде
+    replace: "python3 {{ help_path }}/user/show_doc.py [userfile] cmd | glow -"
+    vars:
+      - name: help_path
+        type: shell
+        params:
+          cmd: "espanso path | grep Config | cut -d : -f 2"
+
+  - trigger: ":help"
+    doc: 
+      - Вывести файл с подсказкой по espanso
+    replace: "glow {{ help_path }}/user/help.md"
+    vars:
+      - name: help_path
+        type: shell
+        params:
+          cmd: "espanso path | grep Config | cut -d : -f 2"
+
+  - trigger: ":shmods"
+    doc: 
+      - Показать список пользовательских файлов
+      - и их включенность (атрибут parent должен указывать на default)
+    replace: "grep -H parent `espanso path | grep Config | cut -d : -f 2`/user/*.yml"
+
+  # дальше пошли просто замены
   - trigger: ":gmm"
     replace: "korolmi@gmail.com"
 
@@ -70,21 +98,3 @@ matches:
   - trigger: ":ли"
     replace: "linux"
     propagate_case: true
-
-  # Dates
-  - trigger: ":date"
-    replace: "{{mydate}}"
-    vars:
-      - name: mydate
-        type: date
-        params:
-          format: "%m/%d/%Y"
-
-  # Shell commands
-  - trigger: ":shell"
-    replace: "{{output}}"
-    vars:
-      - name: output
-        type: shell
-        params:
-          cmd: "echo Hello from your shell"

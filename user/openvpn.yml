@@ -1,0 +1,31 @@
+iname: openvpn
+parent: default
+
+matches:
+  - trigger: ":vpnimp"
+    doc: "Импортировать конфигурацию из файла"
+    replace: "openvpn3 config-import --config filename.ovpn"
+    
+  - trigger: ":vpncnf"
+    doc: "Показать список конфигураций"
+    replace: "openvpn3 configs-list"
+
+  - trigger: ":vpnrmcnf"
+    doc: 
+      - "Удалить конфигурацию"
+      - "Имя конфигурации нужно взять из списка конфигураций (:vpncnf)"
+    replace: "openvpn3 config-remove --config name"
+
+  - trigger: ":vpnst"
+    doc: 
+      - "Стартовать сессию"
+      - "Имя конгфигурации совпадает с именем конфигурационного файла (см. :vpncnf)"
+    replace: "openvpn3 session-start --config name"
+
+  - trigger: ":vpnsess"
+    doc: "Показать список сессий"
+    replace: "openvpn3 sessions-list"
+    
+  - trigger: ":vpnend"
+    doc: "Разъединиться с сессией, имя сессии можно получить из команды со списком сессий (:vpnsess)"
+    replace: "openvpn3 session-manage --config name --disconnect"
