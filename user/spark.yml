@@ -1,0 +1,25 @@
+iname: spark
+parent: default
+
+matches:
+  - trigger: "_s_im"
+    doc: "Выполнить стандартные импорты"
+    replace: | 
+        from pyspark.sql import SparkSession
+        from pyspark.sql import functions as f
+
+  - trigger: "_s_ss"
+    doc: "Создание сессии"
+    replace: "spark = SparkSession.builder.master(\"local\").appName(\"$|$\").getOrCreate()"
+
+  - trigger: "_s_cdf"
+    doc: "Создание dataframe"
+    replace: "spark.createDataFrame($|$,)"
+
+  - trigger: "_s_rd"
+    doc: "Чтение из источника"
+    replace: "spark.read.format(\"$|$\").option().load()"
+
+  - trigger: "_s_wr"
+    doc: "Запись в источник"
+    replace: "write.format(\"$|$\").mode().option().save()"
